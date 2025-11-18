@@ -11,12 +11,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Receive from "./Receive";
+import { useToast } from "@/hooks/use-toast";
+import "@/styles/animations.css"; // Ensure this is imported for animations
 
 const Index = () => {
   const [receiveId, setReceiveId] = useState("");
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const {toast} = useToast();
 
   const handleReceive = async () => {
     if (receiveId.trim().length === 5) {
@@ -31,9 +33,15 @@ const Index = () => {
       // store the data in a store with use context so i can access it from a different file 
       // Fallback: persist to sessionStorage so other routes/components can read it (Receive can read this)
       try {
-        if (data) {
-          sessionStorage.setItem(`qshare:${receiveId.trim()}`, JSON.stringify(data));
+        if (data.data.message === "File not found") {
+          toast({
+            title: "File not found",
+            description: "Please check the ID and try again.",
+            variant: "destructive",
+          });
+          return;
         }
+        sessionStorage.setItem(`qshare:${receiveId.trim()}`, JSON.stringify(data));
       } catch (err) {
         // non-fatal: log but continue navigation
         console.error("Failed to persist received data:", err);
