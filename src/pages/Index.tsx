@@ -32,8 +32,7 @@ const Index = () => {
       // Fallback: persist to sessionStorage so other routes/components can read it (Receive can read this)
       try {
         if (data) {
-          console.log(data)
-          localStorage.setItem(`qshare:${receiveId.trim()}`, JSON.stringify(data));
+          sessionStorage.setItem(`qshare:${receiveId.trim()}`, JSON.stringify(data));
         }
       } catch (err) {
         // non-fatal: log but continue navigation

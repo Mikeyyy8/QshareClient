@@ -17,7 +17,7 @@ const Receive = () => {
       return;
     }
     try {
-      const raw = localStorage.getItem(`qshare:${id}`);
+      const raw = sessionStorage.getItem(`qshare:${id}`);
       if (!raw) {
         console.warn(`No localStorage entry for qshare:${id}`);
         setTextContent("");
@@ -32,7 +32,6 @@ const Receive = () => {
       setTextContent("");
     }
   }, [id]);
-  console.log("Loaded text content:", textContent);
 
   const downloadAsText = () => {
     const blob = new Blob([textContent], { type: "text/plain" });
