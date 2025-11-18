@@ -103,7 +103,7 @@ const Index = () => {
                 </div>
               </PopoverContent>
             </Popover>
-            <Button
+            {/* <Button
               variant="outline"
               size="sm"
               className="transition-smooth hover:border-primary"
@@ -113,7 +113,7 @@ const Index = () => {
                 <Code className="mr-2 h-4 w-4" />
                 API Docs
               </a>
-            </Button>
+            </Button> */}
           </div>
         </div>
       </nav>
