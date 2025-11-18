@@ -12,7 +12,6 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import "@/styles/animations.css"; // Ensure this is imported for animations
 
 const Index = () => {
   const [receiveId, setReceiveId] = useState("");
@@ -30,10 +29,8 @@ const Index = () => {
         }
       );
       const data = await response.json();
-      // store the data in a store with use context so i can access it from a different file 
-      // Fallback: persist to sessionStorage so other routes/components can read it (Receive can read this)
       try {
-        if (data.data.message === "File not found") {
+        if (data.message === "File not found") {
           toast({
             title: "File not found",
             description: "Please check the ID and try again.",

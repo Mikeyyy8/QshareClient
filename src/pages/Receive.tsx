@@ -6,14 +6,17 @@ import { Link } from "react-router-dom";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useEffect, useState } from "react";
 import JSZip from "jszip";
+import { useNavigate } from "react-router-dom";
 
 const Receive = () => {
   const { id } = useParams();
   const [textContent, setTextContent] = useState<string>("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) {
       setTextContent("");
+      navigate("/"); // Redirect to home if no ID is provided
       return;
     }
     try {
