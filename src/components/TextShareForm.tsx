@@ -5,14 +5,18 @@ import { Card } from "@/components/ui/card";
 import { Copy, Share2, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import Loader from "../components/ui/Loader";
 
 export const TextShareForm = () => {
+  const [loading, SetLoading] = useState(false);
   const [text, setText] = useState("");
   const [sharedId, setSharedId] = useState("");
   const [isSharing, setIsSharing] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const { toast } = useToast();
+
+  console.log(isPopoverOpen)
 
   const handleShare = async () => {
     if (!text.trim()) {
@@ -88,18 +92,19 @@ export const TextShareForm = () => {
           />
           
           <div className="flex gap-3">
-            <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+            <Popover open={isPopoverOpen}>
               <PopoverTrigger asChild>
                 <Button 
                   onClick={handleShare}
                   disabled={isSharing || !text.trim() || !!sharedId}
                   className="flex-1 bg-primary hover:bg-primary/90 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/20 text-primary-foreground transition-all duration-200"
                   size="lg"
-                >
+                  >
                   <Share2 className="mr-2 h-4 w-4" />
                   {isSharing ? "Sharing..." : "Share Text"}
                 </Button>
               </PopoverTrigger>
+                {isPopoverOpen && 
               <PopoverContent className="w-80">
                 <div className="space-y-3">
                   <h4 className="font-medium">Text Shared Successfully</h4>
@@ -128,6 +133,7 @@ export const TextShareForm = () => {
                   </Button>
                 </div>
               </PopoverContent>
+}
             </Popover>
           </div>
         </div>

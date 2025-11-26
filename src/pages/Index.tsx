@@ -1,5 +1,5 @@
 import { TextShareForm } from "@/components/TextShareForm";
-import { FileText, Code, Download } from "lucide-react";
+import { FileText, Code, Download, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import {
@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 const Index = () => {
   const [receiveId, setReceiveId] = useState("");
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {toast} = useToast();
 
@@ -47,6 +48,7 @@ const Index = () => {
       navigate(`receive/${receiveId.trim()}`);
       setOpen(false);
       setReceiveId("");
+      setLoading(false);
     }
   };
   return (
@@ -98,7 +100,7 @@ const Index = () => {
                     disabled={receiveId.trim().length !== 5}
                     className="w-full"
                   >
-                    Retrieve Text
+                    {loading ? <LoaderCircle className="animate-spin" /> : "Retrieve Text"}
                   </Button>
                 </div>
               </PopoverContent>
@@ -124,8 +126,7 @@ const Index = () => {
             Share Text Instantly
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Quick and simple text sharing. Paste your content, get a shareable
-            link.
+            Quick and simple text sharing. Paste your content, get a simple ID you can use on another browser.
           </p>
         </header>
 
