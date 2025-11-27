@@ -16,8 +16,6 @@ export const TextShareForm = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const { toast } = useToast();
 
-  console.log(isPopoverOpen)
-
   const handleShare = async () => {
     if (!text.trim()) {
       toast({

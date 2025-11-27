@@ -19,7 +19,7 @@ const Index = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {toast} = useToast();
+  const { toast } = useToast();
 
   const handleReceive = async () => {
     if (receiveId.trim().length === 5) {
@@ -39,8 +39,22 @@ const Index = () => {
             variant: "destructive",
           });
           return;
+        } 
+        if (!data.message) {
+          console.log("No data found");
+          toast({
+            title: "Could not get data",
+            description:
+              "Please check if you have an active internet connection and try again.",
+            variant: "destructive",
+          });
+          return;
         }
-        sessionStorage.setItem(`qshare:${receiveId.trim()}`, JSON.stringify(data));
+        
+        sessionStorage.setItem(
+          `qshare:${receiveId.trim()}`,
+          JSON.stringify(data)
+        );
       } catch (err) {
         // non-fatal: log but continue navigation
         console.error("Failed to persist received data:", err);
@@ -127,7 +141,8 @@ const Index = () => {
             Share Text Instantly
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Quick and simple text sharing. Paste your content, get a simple ID you can use on another device.
+            Quick and simple text sharing. Paste your content, get a simple ID
+            you can use on another device.
           </p>
         </header>
 

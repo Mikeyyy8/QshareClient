@@ -97,7 +97,7 @@ const Receive = () => {
               <FileText className="h-5 w-5 text-primary" />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              qshare
+              Qshare
             </span>
           </div>
           <div className="flex items-center gap-2">
